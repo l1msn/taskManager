@@ -6,6 +6,9 @@ import {
 } from '@reduxjs/toolkit';
 import IStateSchema from '../types/IStateSchema';
 import { createReducerManager } from './reducerManager';
+import rtkApi from "@/shared/api/rtkApi";
+import {userReducer} from "@/entities/User";
+import $api from "@/shared/api/api";
 
 function createReduxStore(
     initialState?: IStateSchema,
@@ -13,6 +16,8 @@ function createReduxStore(
 ) {
     const rootReducers: ReducersMapObject<IStateSchema> = {
         ...asyncReducers,
+        [rtkApi.reducerPath]: rtkApi.reducer,
+        user: userReducer,
     };
 
     const reducerManager = createReducerManager(rootReducers);
@@ -21,6 +26,14 @@ function createReduxStore(
         reducer: reducerManager.reduce as Reducer<CombinedState<IStateSchema>>,
         devTools: __IS_DEV__,
         preloadedState: initialState,
+        middleware: (getDefaultMiddleware) =>
+            getDefaultMiddleware({
+                thunk: {
+                    extraArgument: {
+                        api: $api,
+                    },
+                },
+            }).concat(rtkApi.middleware),
     });
 
     // @ts-ignore

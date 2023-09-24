@@ -12,6 +12,8 @@ import AppLink from '@/shared/ui/AppLink';
 import { RoutePaths } from '@/shared/consts/routerPaths';
 import { motion } from 'framer-motion';
 import TypeAnimationText from '@/shared/ui/AnimationText';
+import {useSelector} from "react-redux";
+import {UserSelectors} from "@/entities/User";
 
 interface INavbarProps {
     className?: string;
@@ -21,6 +23,8 @@ const Navbar: React.FC<INavbarProps> = ({
     className,
 }: INavbarProps): JSX.Element => {
     const { t, i18n } = useTranslation();
+
+    const initAuth = useSelector(UserSelectors.getUserAuthData);
 
     return (
         <header className={classNames(cls.navbar, {}, [className])}>
@@ -44,7 +48,7 @@ const Navbar: React.FC<INavbarProps> = ({
                                 height={54}
                                 width={54}
                                 Svg={LogoIcon}
-                                className={cls.logoImg}
+                                className={initAuth ? cls.logoImgAuth : cls.logoImgNotAuth}
                             />
                         </motion.div>
                         <TypeAnimationText

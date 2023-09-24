@@ -8,8 +8,12 @@
     }
 }
 
-.logoImg {
+.logoImgNotAuth {
     fill: var(--icon);
+}
+
+.logoImgAuth {
+    fill: var(--save);
 }
 
 .logo {

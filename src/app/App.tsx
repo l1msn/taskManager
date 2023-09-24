@@ -4,6 +4,9 @@ import AppRouter from '@/app/providers/Router';
 import Navbar from '@/widgets/Navbar';
 import { VStack } from '@/shared/ui/Stack';
 import Preloader from '@/widgets/Preloader';
+import useAppDispatch from "@/shared/lib/hooks/useAppDispatch/useAppDispatch";
+import {useSelector} from "react-redux";
+import {initAuthData, UserSelectors} from "@/entities/User";
 
 interface IAppProps {
     className?: string;
@@ -11,6 +14,16 @@ interface IAppProps {
 
 const App: React.FC<IAppProps> = ({ className }: IAppProps): JSX.Element => {
     const [loading, setIsLoading] = useState<boolean>(true);
+
+    const dispatch = useAppDispatch();
+
+    const init = useSelector(UserSelectors.getUserInit);
+
+    useEffect(() => {
+        if (!init) {
+            dispatch(initAuthData());
+        }
+    }, [dispatch, init]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -34,7 +47,7 @@ const App: React.FC<IAppProps> = ({ className }: IAppProps): JSX.Element => {
                 <div className="content-page">
                     <VStack max align={'center'}>
                         <Navbar />
-                        <AppRouter />
+                        {init && <AppRouter />}
                     </VStack>
                 </div>
         </div>

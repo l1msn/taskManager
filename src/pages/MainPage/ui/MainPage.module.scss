@@ -1,3 +1,13 @@
 .model {
     height: 75vh;
 }
+
+.greeting {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login, .logout, .tasksBtn {
+    margin-top: 20px;
+    z-index: 10;
+}
