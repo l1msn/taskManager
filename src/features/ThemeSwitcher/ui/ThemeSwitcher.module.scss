@@ -1,0 +1,8 @@
+.icon {
+    transition: 0.3s;
+    fill: var(--icon);
+
+    &:hover {
+        fill: var(--accent)
+    }
+}

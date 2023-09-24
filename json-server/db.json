@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "dev",
+      "password": "dev",
+      "roles": [
+        "DEVELOPER"
+      ]
+    },
+    {
+      "id": "2",
+      "username": "lead",
+      "password": "lead",
+      "roles": [
+        "LEAD"
+      ]
+    },
+    {
+      "id": "3",
+      "username": "master",
+      "password": "master",
+      "roles": [
+        "MASTER"
+      ]
+    }
+  ]
+}
